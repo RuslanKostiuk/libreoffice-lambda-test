@@ -1,0 +1,33 @@
+{
+  "name": "docx-to-pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "serverless:start": "serverless offline --host '0.0.0.0'",
+    "package": "npm run build && node-lambda package --environment build",
+    "deploy": "sls deploy"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@shelf/aws-lambda-libreoffice": "^3.0.8",
+    "envalid": "^7.2.1",
+    "tmp-promise": "^3.0.2",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.1",
+    "@types/tmp": "^0.2.1",
+    "@types/uuid": "^8.3.1",
+    "@types/winston": "^2.4.4",
+    "aws-sdk": "^2.975.0",
+    "dotenv-cli": "^4.0.0",
+    "serverless": "^2.56.0",
+    "serverless-offline": "^8.0.0",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
+  }
+}

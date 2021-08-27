@@ -1,0 +1,31 @@
+service:
+  name: html5-to-pdf
+provider:
+  name: aws
+  runtime: ${env:SLS_DEFAULT_RUNTIME}
+  stage: ${env:SLS_STAGE,'local'}
+  region: ${env:SLS_REGION}
+package:
+  individually: true
+  exclude: 
+    - '**'
+  include:
+    - 'dist/**'
+functions:
+  docx-to-pdf:
+    handler: ${env:SVC_FUNCTION_HANDLER}
+    environment:
+      DOWNLOAD_BUCKET_NAME: ${ env:DOWNLOAD_BUCKET_NAME }
+      LOG_LEVEL: ${ env:LOG_LEVEL }
+      NODE_ENV: ${ env:NODE_ENV }
+      UPLOAD_BUCKET_NAME: ${ env:UPLOAD_BUCKET_NAME }
+    role: ${env:SVC_ROLE}
+    timeout: ${env:SVC_TIMEOUT}
+    package:
+      individually: true
+      include:
+        - dist/**
+    layers:
+      - ${cf:docx-to-pdf-libs-${self:provider.stage}.LibsLayerExport}
+plugins:
+  - serverless-offline
