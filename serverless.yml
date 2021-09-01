@@ -1,5 +1,5 @@
 service:
-  name: html5-to-pdf
+  name: docx-to-pdf
 provider:
   name: aws
   runtime: ${env:SLS_DEFAULT_RUNTIME}
